@@ -1,15 +1,9 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
 
 library(shiny)
+library(DT)
+# Define UI for application that plots expected time spent in each state 
+#before reaching absorbing block.
 
-# Define UI for application that plots binomial and Poisson distributions.
 ui <- fluidPage(
   
   # Application title
@@ -32,10 +26,10 @@ ui <- fluidPage(
     
     # Show a plot of the generated distribution
     mainPanel(
-      h3('Plot'),
-      plotOutput('plot'),
-      tableOutput('table'),
-      width = 9
+      tabsetPanel(
+        tabPanel('Plot',plotOutput('plot')),
+        tabPanel('Table',DT::dataTableOutput('table'))
+    )
     )
  )
 )
@@ -47,18 +41,17 @@ server <- function(input, output) {
       data = read.csv(input$file$datapath)
       dat = data[,-1]
       if (input$choice=='column'){
-        plot(x=1:40,y=dat[,input$N],col='purple',pch=20,xlab='State',
+        plot(x=1:40,y=dat[,input$N],col='purple',pch=20,cex=2,xlab='State',
              ylab='Days')
       }
       else {
-        plot(x=1:40,y=dat[input$N,],col='purple',pch=20,xlab='State',
+        plot(x=1:40,y=dat[input$N,],col='purple',pch=20,cex=2,xlab='State',
              ylab='Days')
       }
     })
-    output$table = renderTable({
+    output$table = DT::renderDataTable({
       data = read.csv(input$file$datapath)
       dat = data[,-1]
-      head(dat)
     })
 }
 
