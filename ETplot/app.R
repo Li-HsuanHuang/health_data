@@ -23,6 +23,7 @@ ui <- fluidPage(
                          ".csv"))
     ),
     
+    
     # Show a plot of the generated distribution
     mainPanel(
       h3('Plot'),
@@ -33,8 +34,8 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-     
-    data = reactive({read.csv(input$file$datapath)})
+    req(input$file1) 
+    data =read.csv(input$file$datapath)
     dat = data[,-1]
     output$plot = renderPlot({
       if (input$choice=='column'){
