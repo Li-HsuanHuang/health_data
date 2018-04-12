@@ -18,6 +18,7 @@ ui <- fluidPage(
                   min = 1,
                   max = 39,
                   value = 1)
+      fileInput('file', "Choose CSV File")
     ),
     
     # Show a plot of the generated distribution
@@ -30,7 +31,8 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-    data = read.csv('expected_time.csv')
+    data = read.csv(input$file$datapath)
+    #data = read.csv('expected_time.csv')
     dat = data[,-1]
     output$plot = renderPlot({
       if (input$choice=='column'){
