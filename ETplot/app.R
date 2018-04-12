@@ -35,8 +35,10 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
     req(input$file1) 
-    data =read.csv(input$file$datapath)
-    dat = data[,-1]
+    data =read.csv(input$file$datapath,header = input$header,
+             sep = input$sep,
+             quote = input$quote)
+    #dat = data[,-1]
     output$plot = renderPlot({
       if (input$choice=='column'){
         plot(x=1:40,y=dat[,input$N],col='purple',pch=20,xlab='State',
