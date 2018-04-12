@@ -18,7 +18,9 @@ ui <- fluidPage(
                   min = 1,
                   max = 39,
                   value = 1),
-      fileInput('file', "Choose CSV File")
+      fileInput('file', "Choose CSV File", accept = c("text/csv",
+                         "text/comma-separated-values,text/plain",
+                         ".csv"))
     ),
     
     # Show a plot of the generated distribution
