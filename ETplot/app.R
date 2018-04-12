@@ -34,7 +34,8 @@ ui <- fluidPage(
     mainPanel(
       h3('Plot'),
       plotOutput('plot'),
-      tableOutput('table')
+      tableOutput('table'),
+      width = 9
     )
  )
 )
