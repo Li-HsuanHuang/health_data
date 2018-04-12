@@ -17,7 +17,7 @@ ui <- fluidPage(
       sliderInput('N','Number of first absorbing states:',
                   min = 1,
                   max = 39,
-                  value = 1)
+                  value = 1),
       fileInput('file', "Choose CSV File")
     ),
     
