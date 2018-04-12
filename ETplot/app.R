@@ -31,8 +31,10 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-    data = read.csv(input$file$datapath)
+     
+    data = reactive({read.csv(input$file$datapath)
     #data = read.csv('expected_time.csv')
+    )}
     dat = data[,-1]
     output$plot = renderPlot({
       if (input$choice=='column'){
